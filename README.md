@@ -63,11 +63,8 @@ jupyter notebook p1/p1_eda_istanbul_airbnb.ipynb
 - **Price is right-skewed** — a log transform will be applied in P2 before model training.
 - **Reviews and availability** act as occupancy proxies and carry predictive signal.
 
-##Key findings (P2 summary)
+## Key Findings (P2 Summary)
 
-- Log-transforming the target (log_price) stabilised variance and improved all model fits — all models were trained on log(price) and back-transformed for final TRY error reporting.
--Six features were engineered beyond the raw P1 columns: neighbourhood median price (aggregation), days since last review (datetime decomposition), host × availability interaction term, professional host flag (binning), and room type dummies (one-hot encoding).
--Neighbourhood median price and room type consistently held the largest coefficients across all models, confirming P1's hypothesis that location and accommodation type are the dominant price drivers.
--Ridge regression was selected as the best model — it matched Multiple Linear Regression in R² while handling multicollinearity between review and location features more robustly.
--Lasso automatically zeroed out low-signal features (e.g. has_review, is_professional_host), confirming that the core signal is concentrated in location and room type.
--Main error sources: the simplified CSV lacks amenity data (pool, WiFi, photos) which likely explain within-neighbourhood price differences; currency volatility in TRY also limits generalisability across time.
+In P2, we built and evaluated five regression models to predict Istanbul Airbnb nightly prices. The target variable `log(price)` was used throughout to handle right skew, with results back-transformed to TRY for final reporting. Six new features were engineered from the cleaned P1 dataset, including neighbourhood median price, days since last review, a host–availability interaction term, a professional host flag, and room type dummy variables.
+
+Ridge regression emerged as the best-performing model, offering strong validation R² while handling multicollinearity between location and review features more robustly than plain Multiple Linear Regression. Lasso confirmed that the core predictive signal is concentrated in neighbourhood and room type — zeroing out weaker features automatically. The main remaining error sources are missing amenity data (WiFi, pool, photos) and within-neighbourhood quality variation, which no linear model can fully capture. These limitations will be addressed in P3 using tree-based models and SHAP explainability.
