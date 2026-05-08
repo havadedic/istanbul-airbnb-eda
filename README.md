@@ -63,7 +63,7 @@ jupyter notebook p1/p1_eda_istanbul_airbnb.ipynb
 - **Price is right-skewed** — a log transform will be applied in P2 before model training.
 - **Reviews and availability** act as occupancy proxies and carry predictive signal.
 
-##Key Findings (P2 Summary)
+##Key findings (P2 summary)
 
 - Log-transforming the target (log_price) stabilised variance and improved all model fits — all models were trained on log(price) and back-transformed for final TRY error reporting.
 -Six features were engineered beyond the raw P1 columns: neighbourhood median price (aggregation), days since last review (datetime decomposition), host × availability interaction term, professional host flag (binning), and room type dummies (one-hot encoding).
