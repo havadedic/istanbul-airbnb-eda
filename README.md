@@ -62,3 +62,12 @@ jupyter notebook p1/p1_eda_istanbul_airbnb.ipynb
 - **Location** (district and GPS coordinates) drives significant price variation across Istanbul.
 - **Price is right-skewed** — a log transform will be applied in P2 before model training.
 - **Reviews and availability** act as occupancy proxies and carry predictive signal.
+
+Key Findings (P2 Summary)
+
+-Log-transforming the target (log_price) stabilised variance and improved all model fits — all models were trained on log(price) and back-transformed for final TRY error reporting.
+-Six features were engineered beyond the raw P1 columns: neighbourhood median price (aggregation), days since last review (datetime decomposition), host × availability interaction term, professional host flag (binning), and room type dummies (one-hot encoding).
+-Neighbourhood median price and room type consistently held the largest coefficients across all models, confirming P1's hypothesis that location and accommodation type are the dominant price drivers.
+-Ridge regression was selected as the best model — it matched Multiple Linear Regression in R² while handling multicollinearity between review and location features more robustly.
+-Lasso automatically zeroed out low-signal features (e.g. has_review, is_professional_host), confirming that the core signal is concentrated in location and room type.
+-Main error sources: the simplified CSV lacks amenity data (pool, WiFi, photos) which likely explain within-neighbourhood price differences; currency volatility in TRY also limits generalisability across time.
